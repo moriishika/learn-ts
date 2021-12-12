@@ -47,8 +47,122 @@ let people: {
     name: "aku",
     grade: 12,
     studies: {
-        name : "matematika",
-        learnHours : 10
+      name: "matematika",
+      learnHours: 10,
     },
   },
 ];
+/* 
+  Function types
+  Parameters and the return value type can be determined
+*/
+
+// an example of a simple regular function that return a number
+function returnNumber(num: number): number {
+  return num;
+}
+
+// ❌ Any value other than 'number' is unable to passed as argument
+// console.log(returnNumber('a string of anything'));
+
+// ✅ Number type value can be used
+console.log(returnNumber(13));
+
+// An example with rest parameter where it only accepts number values
+function returnNumbers(...num: Array<number>): Array<number> {
+  return num;
+}
+
+// ❌ It wouldnt accepts any type of value except numbers
+// console.log(returnNumbers('halo','its','me','moriishikaa'))
+
+// ✅ Numbers can be used
+console.log(returnNumbers(1, 2, 3, 4, 5, 6));
+
+// a simple arrow function
+const returnNomber = (num: number): number => {
+  return num;
+};
+
+// we can specify the shape of a callback as well
+
+function doSomething(callback: (astring: string) => string): string {
+  return callback("hallo");
+}
+
+doSomething((mantap: string): string => {
+  return mantap;
+});
+
+/* 
+  Void Function
+  where the function return undefined or just implicitly return undefined
+  void function is usually used for a function that wont return anything 
+*/
+
+// Explicitly return undefined
+function explicitReturn(): void {
+  // return 12; -> ❌ error because the function will return number
+  // ✅ it accepts undefined
+  return undefined;
+}
+
+console.log(explicitReturn());
+
+// Implicitly return undefined by not add any return
+function implicitReturn(): void {}
+
+console.log(explicitReturn());
+
+/* 
+    Optional Parameters
+    using '?' after the name of the parameter to make it optional
+ */
+
+function optionalParam(callback?: (name?: string) => string) {
+  if (callback === undefined) {
+    callback = () => {
+      return "anytihing";
+    };
+    return callback;
+  }
+  return callback();
+}
+
+console.log(optionalParam);
+console.log(() => {
+  return "keren";
+});
+
+/* 
+  Default value parameter
+  Use '=' to gives a default value to a parameter
+*/
+
+// Because of the default value we dont have to give the type
+// ❌ thanks to the type inference
+function defaultValueWithType(name: string = "mantap", grade = 13): object {
+  return {
+    name,
+    grade,
+  };
+}
+
+// ✅ this is enough
+function defaultValueWithout(name = "mantap", grade = 13): object {
+  return {
+    name,
+    grade,
+  };
+}
+
+// Hover the error the type will be 
+// string | undefined because default value added to the parameter
+// console.log(defaultValueWithout(12, 15)); 
+
+console.log(defaultValueWithout('seorang siswa', 12));
+
+/* 
+  Union Types
+  
+*/
